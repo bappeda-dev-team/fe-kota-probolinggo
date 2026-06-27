@@ -1,26 +1,75 @@
 'use client'
 
+import Image from 'next/image';
+import Link from 'next/link';
+import { useParams, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import {
-  TbBook, TbApps, TbChecklist, TbShoppingCartDollar,
-  TbLogout, TbBook2, TbBulb, TbFileAlert, TbTooltip, TbBinaryTree, TbBuildingFortress,
-  TbBuildingCommunity, TbDatabaseCog, TbHome, TbFileDelta, TbFile3D,
-  TbCircleArrowLeftFilled, TbBadges, TbBuilding, TbChevronRight, TbCircleCheck,
-  TbBuildingEstate, TbFileChart, TbFileDots, TbFileCode, TbFileCode2, TbUsers,
-  TbUser, TbHexagonLetterR, TbBinaryTree2, TbTarget, TbMapPin, TbChartBar, TbCalendarShare,
-  TbCalendar, TbHexagonLetterV, TbHexagonLetterM, TbClipboardText, TbZoomExclamation,
-  TbListDetails, TbAlertTriangle, TbDatabasePlus, TbCalendarPlus, TbDeviceImacDollar,
-  TbFocus2, TbHexagonLetterC, TbHexagonLetterO, TbHexagonLetterI, TbUserSearch,
-  TbBuildingCottage, TbCalendarStar, TbChartPie, TbListTree, TbFileImport,
-  TbFileCheck, TbRubberStamp, TbAB2, TbLockSquareRounded, TbLockSquare, TbLockSquareRoundedFilled
+    TbAB2,
+    TbAlertTriangle,
+    TbApps,
+    TbBadges,
+    TbBinaryTree,
+    TbBinaryTree2,
+    TbBook,
+    TbBook2,
+    TbBuilding,
+    TbBuildingCommunity,
+    TbBuildingCottage,
+    TbBuildingEstate,
+    TbBuildingFortress,
+    TbBulb,
+    TbCalendar,
+    TbCalendarPlus,
+    TbCalendarShare,
+    TbCalendarStar,
+    TbChartBar,
+    TbChartPie,
+    TbChecklist,
+    TbChevronRight,
+    TbCircleArrowLeftFilled,
+    TbCircleCheck,
+    TbCircleFilled,
+    TbClipboardText,
+    TbDatabaseCog,
+    TbDatabasePlus,
+    TbDeviceImacDollar,
+    TbDice4Filled,
+    TbFile3D,
+    TbFileAlert,
+    TbFileChart,
+    TbFileCheck,
+    TbFileCode, TbFileCode2,
+    TbFileDelta,
+    TbFileDots,
+    TbFileImport,
+    TbFocus2, TbHexagonLetterC,
+    TbHexagonLetterI,
+    TbHexagonLetterM,
+    TbHexagonLetterO,
+    TbHexagonLetterR,
+    TbHexagonLetterV,
+    TbHome,
+    TbListDetails,
+    TbListTree,
+    TbLockSquare,
+    TbLockSquareRounded,
+    TbLockSquareRoundedFilled,
+    TbLogout,
+    TbMapPin,
+    TbRubberStamp,
+    TbShoppingCartDollar,
+    TbTarget,
+    TbTooltip,
+    TbUser,
+    TbUsers,
+    TbUserSearch,
+    TbZoomExclamation
 } from "react-icons/tb";
-import Image from 'next/image';
-import { usePathname, useParams } from 'next/navigation';
-import Link from 'next/link';
 // @ts-ignore: allow side-effect CSS import without type declarations
 import "@/app/globals.css";
-import { logout, getUser } from '../lib/Cookie';
 import { useBrandingContext } from '@/context/BrandingContext';
+import { getUser, logout } from '../lib/Cookie';
 
 interface SidebarProps {
   isOpen: boolean | null;
@@ -60,6 +109,7 @@ export const Sidebar = ({ isZoomed, isOpen, toggleSidebar }: SidebarProps) => {
   const [UsulanLaporan, setUsulanLaporan] = useState<boolean | null>(null);
   const [Review, setReview] = useState<boolean | null>(null);
   const [RenstraView, setRenstraView] = useState<boolean | null>(null);
+  const [LaporanRB, setLaporanRB] = useState<boolean | null>(null);
 
   useEffect(() => {
     const fetchUser = getUser();
@@ -394,6 +444,12 @@ export const Sidebar = ({ isZoomed, isOpen, toggleSidebar }: SidebarProps) => {
                   <span className={`${!isOpen && 'hidden'} origin-left duration-200`}>Master Usulan</span>
                 </li>
               </Link>
+              <Link href="/DataMaster/master-rb">
+                <li className={`flex items-center gap-x-2 cursor-pointer p-2 rounded-xl transition-all duration-300 ease-in-out ${url === "/DataMaster/master-rb" ? "bg-white text-gray-800" : "hover:bg-slate-500"}`}>
+                  <TbDice4Filled className="text-xl" />
+                  <span className={`${!isOpen && 'hidden'} origin-left duration-200`}>Master RB</span>
+                </li>
+              </Link>
               <Link href="/DataMaster/programunggulan">
                 <li className={`flex items-center gap-x-2 cursor-pointer text-sm p-2 rounded-xl transition-all duration-300 ease-in-out ${url === "/DataMaster/programunggulan" ? "bg-white text-gray-800" : "hover:bg-slate-500"}`}>
                   <TbChartPie className="text-2xl" />
@@ -492,6 +548,12 @@ export const Sidebar = ({ isZoomed, isOpen, toggleSidebar }: SidebarProps) => {
                 <li className={`flex items-center gap-x-2 cursor-pointer p-2 rounded-xl ${url === "/subkegiatanopd" ? "bg-white text-gray-800" : "hover:bg-slate-500"}`}>
                   <TbFileCode2 className="text-xl" />
                   <span className={`${!isOpen && 'hidden'} origin-left duration-200`}>Sub Kegiatan OPD</span>
+                </li>
+              </Link>
+              <Link href="/DataMaster/master-rb">
+                <li className={`flex items-center gap-x-2 cursor-pointer p-2 rounded-xl transition-all duration-300 ease-in-out ${url === "/DataMasterOpd/DataMaster/master-rb" ? "bg-white text-gray-800" : "hover:bg-slate-500"}`}>
+                  <TbDice4Filled className="text-xl" />
+                  <span className={`${!isOpen && 'hidden'} origin-left duration-200`}>Master RB</span>
                 </li>
               </Link>
             </div>
@@ -1155,6 +1217,32 @@ export const Sidebar = ({ isZoomed, isOpen, toggleSidebar }: SidebarProps) => {
                 <span className={`${!isOpen && 'hidden'} origin-left duration-200`}>Renaksi Tematik</span>
               </li>
             </Link>
+            {/* LABEL LAPORAN RB */}
+            <li
+              className="flex justify-between items-center gap-x-2 cursor-pointer p-2 hover:bg-slate-500 rounded-xl transition-all duration-300 ease-in-out"
+              onClick={() => setLaporanRB(Review ? false : true)}
+            >
+              <div className="flex items-center gap-2">
+                <TbDice4Filled className="text-xl" />
+                <span className={`${!isOpen && 'hidden'} origin-left`}>Laporan RB</span>
+              </div>
+              <TbChevronRight className={`transition-all duration-200 ease-in-out ${LaporanRB ? "rotate-90" : ""}`} />
+            </li>
+            {/* SUBS MENU LAPORAN RB */}
+            <div className={`transition-all duration-300 ease-in-out ${LaporanRB ? 'px-3 py-2 flex flex-col border-l-2 border-white rounded-b-xl ml-2  max-h-screen opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+              <Link href="/laporanrb/general">
+                <li className={`flex items-center gap-x-2 cursor-pointer p-2 rounded-xl ${url === "/laporanrb/general" ? "bg-white text-gray-800" : "hover:bg-slate-500"}`}>
+                  <TbCircleFilled className="text-xl" />
+                  <span className={`${!isOpen && 'hidden'} origin-left duration-200`}>RB General</span>
+                </li>
+              </Link>
+              <Link href="/laporanrb/tematik">
+                <li className={`flex items-center gap-x-2 cursor-pointer p-2 rounded-xl ${url === "/laporanrb/tematik" ? "bg-white text-gray-800" : "hover:bg-slate-500"}`}>
+                  <TbCircleFilled className="text-xl" />
+                  <span className={`${!isOpen && 'hidden'} origin-left duration-200`}>RB Tematik</span>
+                </li>
+              </Link>
+            </div>
             <Link href="/laporancascadingopd">
               <li className={`flex items-center gap-x-2 cursor-pointer p-2 rounded-xl ${url === "/laporancascadingopd" ? "bg-white text-gray-800" : "hover:bg-slate-500"}`}>
                 <TbListDetails className="text-xl" />
